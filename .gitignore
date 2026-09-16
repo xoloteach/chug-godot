@@ -1,0 +1,9 @@
+# Godot 4 .gitignore
+.godot/
+*.translation
+export_presets.cfg
+
+# OS / Editor
+.DS_Store
+*.tmp
+*.log
