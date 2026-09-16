@@ -10,7 +10,7 @@ config/name="CHUG: Shadow of Fame"
 config/description="A cinematic shadow fighting RPG rebuilt in Godot Engine 4."
 config/version="4.0.0"
 run/main_scene="res://scenes/Main.tscn"
-config/features=PackedStringArray("4.3", "Forward Plus")
+config/features=PackedStringArray("4.7", "Forward Plus")
 boot_splash/bg_color=Color(0.05, 0.02, 0.01, 1)
 
 [autoload]
