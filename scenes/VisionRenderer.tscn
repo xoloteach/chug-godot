@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://vision_renderer_scene_001"]
+
+[ext_resource type="Script" path="res://tests/vision_renderer.gd" id="1_vis_rend"]
+
+[node name="VisionRenderer" type="Node"]
+script = ExtResource("1_vis_rend")
