@@ -1,0 +1,317 @@
+[gd_scene load_steps=6 format=3 uid="uid://cuiidle00001"]
+
+[ext_resource type="Script" path="res://scripts/UI.gd" id="1_ui"]
+
+[sub_resource type="StyleBoxFlat" id="SB_bar"]
+bg_color = Color(0.09, 0.10, 0.15, 0.82)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_left = 8
+corner_radius_bottom_right = 8
+content_margin_left = 12.0
+content_margin_top = 8.0
+content_margin_right = 12.0
+content_margin_bottom = 8.0
+
+[sub_resource type="StyleBoxFlat" id="SB_panel"]
+bg_color = Color(0.08, 0.09, 0.14, 0.94)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.35, 0.45, 0.7, 0.6)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_left = 10
+corner_radius_bottom_right = 10
+
+[sub_resource type="StyleBoxFlat" id="SB_overlay"]
+bg_color = Color(0.05, 0.06, 0.10, 0.97)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.5, 0.6, 0.9, 0.7)
+corner_radius_top_left = 14
+corner_radius_top_right = 14
+corner_radius_bottom_left = 14
+corner_radius_bottom_right = 14
+content_margin_left = 22.0
+content_margin_top = 22.0
+content_margin_right = 22.0
+content_margin_bottom = 22.0
+
+[node name="UI" type="CanvasLayer"]
+script = ExtResource("1_ui")
+
+[node name="HUD" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="Bar" type="PanelContainer" parent="HUD"]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_left = 8.0
+offset_top = 8.0
+offset_right = -8.0
+offset_bottom = 96.0
+grow_horizontal = 2
+theme_override_styles/panel = SubResource("SB_bar")
+
+[node name="Row" type="HBoxContainer" parent="HUD/Bar"]
+layout_mode = 2
+theme_override_constants/separation = 16
+
+[node name="Currencies" type="VBoxContainer" parent="HUD/Bar/Row"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 2
+
+[node name="GoldRow" type="HBoxContainer" parent="HUD/Bar/Row/Currencies"]
+layout_mode = 2
+
+[node name="GoldTag" type="Label" parent="HUD/Bar/Row/Currencies/GoldRow"]
+layout_mode = 2
+text = "Gold: "
+theme_override_colors/font_color = Color(0.95, 0.82, 0.3, 1)
+
+[node name="GoldValue" type="Label" parent="HUD/Bar/Row/Currencies/GoldRow"]
+layout_mode = 2
+text = "0"
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+
+[node name="EssenceRow" type="HBoxContainer" parent="HUD/Bar/Row/Currencies"]
+layout_mode = 2
+
+[node name="EssenceTag" type="Label" parent="HUD/Bar/Row/Currencies/EssenceRow"]
+layout_mode = 2
+text = "Essence: "
+theme_override_colors/font_color = Color(0.55, 0.8, 1, 1)
+
+[node name="EssenceValue" type="Label" parent="HUD/Bar/Row/Currencies/EssenceRow"]
+layout_mode = 2
+text = "0"
+
+[node name="IncomeRow" type="HBoxContainer" parent="HUD/Bar/Row/Currencies"]
+layout_mode = 2
+
+[node name="IncomeTag" type="Label" parent="HUD/Bar/Row/Currencies/IncomeRow"]
+layout_mode = 2
+text = "Income: "
+theme_override_colors/font_color = Color(0.7, 0.9, 0.7, 1)
+
+[node name="IncomeValue" type="Label" parent="HUD/Bar/Row/Currencies/IncomeRow"]
+layout_mode = 2
+text = "0/s"
+
+[node name="ChapterBox" type="VBoxContainer" parent="HUD/Bar/Row"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 2
+
+[node name="ZoneName" type="Label" parent="HUD/Bar/Row/ChapterBox"]
+layout_mode = 2
+text = "The Greenwood Vale"
+horizontal_alignment = 2
+theme_override_colors/font_color = Color(0.85, 0.8, 1, 1)
+
+[node name="ChapterText" type="Label" parent="HUD/Bar/Row/ChapterBox"]
+layout_mode = 2
+size_flags_vertical = 3
+text = "Ch. 1"
+autowrap_mode = 2
+horizontal_alignment = 2
+theme_override_font_sizes/font_size = 12
+
+[node name="Tabs" type="HBoxContainer" parent="HUD/Bar/Row"]
+layout_mode = 2
+theme_override_constants/separation = 6
+
+[node name="UpgradesTab" type="Button" parent="HUD/Bar/Row/Tabs"]
+layout_mode = 2
+text = "Upgrades"
+
+[node name="ZonesTab" type="Button" parent="HUD/Bar/Row/Tabs"]
+layout_mode = 2
+text = "Chapters"
+
+[node name="ResetButton" type="Button" parent="HUD/Bar/Row/Tabs"]
+layout_mode = 2
+text = "Reset"
+
+[node name="UpgradesPanel" type="Panel" parent="."]
+anchors_preset = 6
+anchor_left = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -352.0
+offset_top = 104.0
+offset_right = -8.0
+offset_bottom = -8.0
+grow_horizontal = 0
+grow_vertical = 2
+theme_override_styles/panel = SubResource("SB_panel")
+
+[node name="Margin" type="MarginContainer" parent="UpgradesPanel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="Content" type="VBoxContainer" parent="UpgradesPanel/Margin"]
+layout_mode = 2
+theme_override_constants/separation = 6
+
+[node name="Title" type="Label" parent="UpgradesPanel/Margin/Content"]
+layout_mode = 2
+text = "Upgrades"
+horizontal_alignment = 1
+theme_override_font_sizes/font_size = 18
+
+[node name="Scroll" type="ScrollContainer" parent="UpgradesPanel/Margin/Content"]
+layout_mode = 2
+size_flags_vertical = 3
+horizontal_scroll_mode = 0
+
+[node name="List" type="VBoxContainer" parent="UpgradesPanel/Margin/Content/Scroll"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 6
+
+[node name="ZonesPanel" type="Panel" parent="."]
+anchors_preset = 4
+anchor_top = 0.0
+anchor_bottom = 1.0
+offset_left = 8.0
+offset_top = 104.0
+offset_right = 352.0
+offset_bottom = -8.0
+grow_vertical = 2
+theme_override_styles/panel = SubResource("SB_panel")
+
+[node name="Margin" type="MarginContainer" parent="ZonesPanel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="Content" type="VBoxContainer" parent="ZonesPanel/Margin"]
+layout_mode = 2
+theme_override_constants/separation = 6
+
+[node name="Title" type="Label" parent="ZonesPanel/Margin/Content"]
+layout_mode = 2
+text = "Chapters & Zones"
+horizontal_alignment = 1
+theme_override_font_sizes/font_size = 18
+
+[node name="Scroll" type="ScrollContainer" parent="ZonesPanel/Margin/Content"]
+layout_mode = 2
+size_flags_vertical = 3
+horizontal_scroll_mode = 0
+
+[node name="List" type="VBoxContainer" parent="ZonesPanel/Margin/Content/Scroll"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 8
+
+[node name="IntroOverlay" type="Panel" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("SB_overlay")
+
+[node name="Center" type="CenterContainer" parent="IntroOverlay"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Box" type="VBoxContainer" parent="IntroOverlay/Center"]
+layout_mode = 2
+theme_override_constants/separation = 18
+
+[node name="TitleLabel" type="Label" parent="IntroOverlay/Center/Box"]
+custom_minimum_size = Vector2(320, 0)
+layout_mode = 2
+text = "Chronicles of the Idle Wanderer"
+horizontal_alignment = 1
+theme_override_colors/font_color = Color(0.9, 0.85, 1, 1)
+theme_override_font_sizes/font_size = 26
+
+[node name="IntroText" type="Label" parent="IntroOverlay/Center/Box"]
+custom_minimum_size = Vector2(520, 0)
+layout_mode = 2
+text = "..."
+autowrap_mode = 2
+horizontal_alignment = 1
+theme_override_font_sizes/font_size = 17
+
+[node name="CloseIntro" type="Button" parent="IntroOverlay/Center/Box"]
+custom_minimum_size = Vector2(220, 48)
+layout_mode = 2
+size_flags_horizontal = 4
+text = "Begin the Journey"
+
+[node name="OfflinePopup" type="Panel" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("SB_overlay")
+
+[node name="Center" type="CenterContainer" parent="OfflinePopup"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Box" type="VBoxContainer" parent="OfflinePopup/Center"]
+layout_mode = 2
+theme_override_constants/separation = 16
+
+[node name="Title" type="Label" parent="OfflinePopup/Center/Box"]
+layout_mode = 2
+text = "Welcome Back!"
+horizontal_alignment = 1
+theme_override_colors/font_color = Color(0.95, 0.85, 0.4, 1)
+theme_override_font_sizes/font_size = 24
+
+[node name="OfflineText" type="Label" parent="OfflinePopup/Center/Box"]
+custom_minimum_size = Vector2(460, 0)
+layout_mode = 2
+text = "..."
+autowrap_mode = 2
+horizontal_alignment = 1
+theme_override_font_sizes/font_size = 16
+
+[node name="CloseOffline" type="Button" parent="OfflinePopup/Center/Box"]
+custom_minimum_size = Vector2(180, 46)
+layout_mode = 2
+size_flags_horizontal = 4
+text = "Claim"

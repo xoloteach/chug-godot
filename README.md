@@ -1,33 +1,44 @@
-# CHUG: Shadow of Fame — Godot Engine 4 Rebuild
+# Chronicles of the Idle Wanderer
 
-A cinematic fighting RPG rebuilt from the ground up in **Godot Engine 4**.
+A **3D idle-adventure web game** built with **Godot 4.7.1** and low-poly 3D models authored in **Blender 5.2.1**. A hero auto-explores a procedurally themed world, earning gold and essence over time while a randomly generated plot unfolds.
 
----
+## Features
 
-## 📚 Complete Technical Documentation (18,800+ Lines)
+- **Randomly generated plot** every new game (seeded — stable across reloads of the same run)
+- **Idle economy** — gold + essence per second, 9 upgrades across income / travel / gear / companions
+- **5 unlockable zones / chapters**, each re-theming the 3D world (ground, fog, sky, sun) and advancing the story
+- **Offline earnings** (clamped to 8h at 50% rate) + **auto-save** to browser storage, with a welcome-back popup
+- **3D scene** — hero, trees, rocks, chests, crystals, enemies; third-person follow camera, procedural sky, fog, soft shadows
+- **Cross-platform input** — desktop keyboard/mouse (WASD/arrows + drag-orbit) **and** mobile virtual joystick + action buttons + touch, auto-detected and fully responsive
 
-The complete game systems, narrative script, combat frame data, and engine blueprints are fully documented in the `docs/` folder:
+## Play locally
 
-1. **[`01_STORY_AND_CAMPAIGN_SCRIPT.md`](docs/01_STORY_AND_CAMPAIGN_SCRIPT.md)** (6,446 lines)
-   - Full 50-part verbatim dialogue script, stage directions, speaker profiles, combat triggers, glitch cues, and world progression across 3 Worlds, 5 Acts, and 10 Chapters.
+The exported web build lives at the repository root. Serve it with any static file server:
 
-2. **[`02_COMBAT_ENGINE_AND_MOVESETS.md`](docs/02_COMBAT_ENGINE_AND_MOVESETS.md)** (3,101 lines)
-   - Frame-accurate moveset tables for all 15 weapon styles (Fists, Daggers, Sais, Batons, Nunchaku, Kamas, Katana, Staff, Scythe, Hammer, Claws, Spear, Composite Sword, Blood Reaper, AK-47).
-   - Physics equations, hitboxes, damage formulas, combo scaling, 3-tier Rage system, and 25+ enemy AI decision trees.
+```sh
+python3 -m http.server 8000
+```
 
-3. **[`03_RPG_SYSTEMS_ECONOMY_AND_PROGRESSION.md`](docs/03_RPG_SYSTEMS_ECONOMY_AND_PROGRESSION.md)** (3,105 lines)
-   - Complete 50-level XP progression table, stat point allocation formulas (HP, ATK, DEF, SPD, CRIT), currency economy, gear star upgrades, and master armory item catalog.
+Then open <http://localhost:8000/> in a browser. (A static server is required — opening `index.html` directly via `file://` will not load the WebAssembly.)
 
-4. **[`04_ROSTER_SQUAD_AND_CAMP_SYSTEMS.md`](docs/04_ROSTER_SQUAD_AND_CAMP_SYSTEMS.md)** (3,102 lines)
-   - Character dossiers (Chug, Yassine, Tora, Raevan, Sorya, Harjeev, Solo, Knight, M.R, Addy, Drakos, Nexters), tactical squad synergy buffs, Ash Camp hub, and training chamber skill paths.
+## Deployment (GitHub Pages)
 
-5. **[`05_GODOT_ARCHITECTURE_AND_IMPLEMENTATION_PLAN.md`](docs/05_GODOT_ARCHITECTURE_AND_IMPLEMENTATION_PLAN.md)** (3,109 lines)
-   - Complete Godot 4 engineering blueprint: Autoload singletons (`GameData.gd`, `SaveStore.gd`, `GameSession.gd`, `AudioManager.gd`), scene tree hierarchies, shaders, virtual controls, and development roadmap.
+This repo deploys automatically to GitHub Pages via `.github/workflows/deploy.yml`:
 
----
+- On every push to `main` (or a manual "Run workflow"), the workflow uploads the repository root as a Pages artifact and publishes it — no Godot rebuild in CI, since the exported build is committed.
+- Enable it once under **Settings → Pages → Build and deployment → Source: GitHub Actions**.
+- The build is a **single-threaded WebGL2** export, so it needs **no COOP/COEP headers** and works on GitHub Pages as-is.
 
-## 🚀 Getting Started
+## Repository layout
 
-1. Open **Godot Engine 4.3+** or **4.4+**.
-2. Click **Import** and select `project.godot`.
-3. Run the project (`F5`) to start from `res://scenes/Main.tscn`.
+| Path | Purpose |
+|------|---------|
+| `index.html`, `index.js`, `index.wasm`, `index.pck`, icons, service worker | Exported Godot web build (served by GitHub Pages) |
+| `godot-src/` | Godot 4.7.1 project source (open in the Godot editor to develop) |
+| `godot-src/tools_blender/` | Blender scripts used to author the 3D models |
+| `.github/workflows/deploy.yml` | GitHub Pages deployment workflow |
+
+## Rebuilding the web export
+
+Open `godot-src/` in Godot 4.7.1, then export the **Web** preset (or headless:
+`godot --headless --export-release "Web" <output>/index.html`) and copy the result to the repo root.
