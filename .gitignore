@@ -1,9 +1,12 @@
-# Godot 4 .gitignore
+# Godot editor cache (regenerable)
 .godot/
-*.translation
-export_presets.cfg
+godot-src/.godot/
 
-# OS / Editor
+# Local tooling / large binaries (never commit)
+/tools/
+node_modules/
+.cache/
+
+# OS / editor cruft
 .DS_Store
 *.tmp
-*.log

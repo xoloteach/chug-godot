@@ -1,4 +1,4 @@
-name: "Deploy CHUG: Shadow of Fame to GitHub Pages"
+name: "Deploy Chronicles of the Idle Wanderer to GitHub Pages"
 
 on:
   push:
@@ -16,48 +16,24 @@ concurrency:
   cancel-in-progress: false
 
 jobs:
-  build:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
-        with:
-          lfs: true
-
-      - name: Setup Godot Engine 4.3
-        uses: chickensoft-games/setup-godot@v2
-        with:
-          version: 4.3.0
-          use-dotnet: false
-          include-templates: true
-
-      - name: Verify Godot Installation
-        run: godot --version
-
-      - name: Create Web Build Directory
-        run: mkdir -p build/web
-
-      - name: Export Godot Web Build
-        run: godot --headless --export-release "Web" build/web/index.html
-
-      - name: Copy Service Worker for COOP/COEP Headers
-        run: |
-          cp coi-serviceworker.js build/web/
-          # Inject coi-serviceworker into index.html
-          sed -i 's/<head>/<head><script src="coi-serviceworker.js"><\/script>/' build/web/index.html
-
-      - name: Upload GitHub Pages Artifact
-        uses: actions/upload-pages-artifact@v3
-        with:
-          path: build/web
-
   deploy:
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-latest
-    needs: build
     steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Pages
+        uses: actions/configure-pages@v5
+
+      - name: Upload GitHub Pages Artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          # The exported Godot web build lives at the repository root
+          path: .
+
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
